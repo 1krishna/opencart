@@ -6,11 +6,11 @@
 
 	<!-- Web Fonts  -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
 
 	<!-- Vendor CSS -->
 	<link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.css" />
 	<link rel="stylesheet" href="vendor/animate/animate.css">
-	<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
 
 	<link rel="stylesheet" href="vendor/font-awesome/css/fontawesome-all.min.css" />
 	<link rel="stylesheet" href="vendor/magnific-popup/magnific-popup.css" />
@@ -19,8 +19,18 @@
 	<!-- Specific Page Vendor CSS -->
 	<link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.css" />
 	<link rel="stylesheet" href="vendor/jquery-ui/jquery-ui.theme.css" />
+	<link rel="stylesheet" href="vendor/select2/css/select2.css" />
+	<link rel="stylesheet" href="vendor/select2-bootstrap-theme/select2-bootstrap.min.css" />
 	<link rel="stylesheet" href="vendor/bootstrap-multiselect/bootstrap-multiselect.css" />
-	<link rel="stylesheet" href="vendor/morris/morris.css" />
+	<link rel="stylesheet" href="vendor/bootstrap-tagsinput/bootstrap-tagsinput.css" />
+	<link rel="stylesheet" href="vendor/bootstrap-colorpicker/css/bootstrap-colorpicker.css" />
+	<link rel="stylesheet" href="vendor/bootstrap-timepicker/css/bootstrap-timepicker.css" />
+	<link rel="stylesheet" href="vendor/dropzone/basic.css" />
+	<link rel="stylesheet" href="vendor/dropzone/dropzone.css" />
+	<link rel="stylesheet" href="vendor/bootstrap-markdown/css/bootstrap-markdown.min.css" />
+	<link rel="stylesheet" href="vendor/codemirror/lib/codemirror.css" />
+	<link rel="stylesheet" href="vendor/codemirror/theme/monokai.css" />
+	<link rel="stylesheet" href="vendor/summernote/summernote.css" />
 
 	<!-- Theme CSS -->
 	<link rel="stylesheet" href="css/theme.css" />
@@ -88,6 +98,7 @@
 								<div class="form-group row">
 									<label class="col-lg-3 control-label text-lg-right pt-2" for="inputDefault">Product Name<span class="required">*</span></label>
 									<div class="col-lg-6">
+
 										<select data-plugin-selectTwo class="form-control populate" id='pro_id' <?php if (isset($_POST['product_id'])) {
 																													echo "disabled";
 																												} ?>>
@@ -160,6 +171,7 @@
 	<script src="vendor/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 	<script src="vendor/common/common.js"></script>
 	<script src="vendor/nanoscroller/nanoscroller.js"></script>
+	<script src="vendor/select2/js/select2.js"></script>
 	<script src="vendor/magnific-popup/jquery.magnific-popup.js"></script>
 	<script src="vendor/jquery-placeholder/jquery-placeholder.js"></script>
 
@@ -189,6 +201,8 @@
 	<script src="vendor/jqvmap/maps/continents/jquery.vmap.europe.js"></script>
 	<script src="vendor/jqvmap/maps/continents/jquery.vmap.north-america.js"></script>
 	<script src="vendor/jqvmap/maps/continents/jquery.vmap.south-america.js"></script>
+	<script src="vendor/summernote/summernote.js"></script>
+
 
 	<!-- Theme Base, Components and Settings -->
 	<script src="js/theme.js"></script>
@@ -288,7 +302,7 @@
 				type: 'post',
 				success: function(data) {
 					alert(data);
-					window.location='pro_view.php';
+					window.location = 'pro_view.php';
 				},
 				failure: function(data) {
 					alert('Error While Adding Product.');
