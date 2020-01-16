@@ -12,6 +12,7 @@
 
 	if (isset($_POST['phnum']) && isset($_POST['passwd'])) {
 		$check = "SELECT * from `oc_farmer` where oc_f_num=" . '"' . $_POST['phnum'] . '"';
+		echo $check;
 		$check = mysqli_query($conn, $check);
 		$login_row = mysqli_fetch_assoc($check);
 		if ($_POST['phnum'] == $login_row['oc_f_num'] && $_POST['passwd'] == $login_row['oc_f_password']) {
@@ -33,11 +34,10 @@
 			<?php
 			} else {
 				session_start();
-				$_SESSION['farmer_id'] = $login_row['oc_f_number'];
 				$_SESSION['farmer_name'] = $login_row['oc_f_name'];
 				$_SESSION['farmer_num'] = $login_row['oc_f_num'];
 				$_SESSION['farmer_status'] = $login_row['oc_f_status'];
-				header('Location: dashboard.php');
+				header('Location: pro_view.php');
 			}
 		} else {
 			?>

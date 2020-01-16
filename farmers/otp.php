@@ -35,16 +35,16 @@
         if($x==0){
             include 'msg_otp.php';
         }
-        $query = "INSERT INTO `oc_farmer`(`oc_f_name`, `oc_f_num`, `oc_f_mail`, `oc_f_password`,`oc_f_status`, `oc_f_otp`) VALUES ('$name','$num','$email','$pwd','$stat','$random')";
+        $query = "INSERT INTO `oc_farmer`(`oc_f_name`, `oc_f_num`, `oc_f_mail`, `oc_f_password`,`oc_f_status`, `oc_f_otp`) VALUES ('$name','91$num','$email','$pwd','$stat','$random')";
         $q1 = mysqli_query($conn, $query);
     } else if(isset($_POST['otp']))  {
         $num=$_POST['num'];
         $otp=$_POST['otp'];
-        $check_otp="SELECT oc_f_otp from oc_farmer where oc_f_otp=$otp";
+        $check_otp="SELECT oc_f_otp from oc_farmer where oc_f_num='91$num'";
         $check_otp=mysqli_query($conn,$check_otp);
         $check_otp=mysqli_fetch_assoc($check_otp);
         if($check_otp['oc_f_otp']==$otp){
-            echo "hi";
+
             $otp_valid="update oc_farmer set oc_f_otp_status=1,oc_f_otp=0 where oc_f_num=$num";
             echo $otp_valid;
             if(mysqli_query($conn,$otp_valid)){

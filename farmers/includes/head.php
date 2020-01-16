@@ -1,7 +1,5 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'opencart');
-session_start();
-
+include 'connect.php';
 ?>
 <!-- Basic -->
 <meta charset="UTF-8">
