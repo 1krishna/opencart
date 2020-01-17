@@ -86,7 +86,7 @@
 
         if(isset($_POST['product_sold'])){
             $product_id = $_POST['product_id'];
-            $query = "UPDATE oc_product set status=0 where product_id=$product_id";
+            $query = "UPDATE oc_product set status=0,quantity=0 where product_id=$product_id";
             $res = mysqli_query($conn,$query);
             if($res){
                 echo "Product Has been Sold";
