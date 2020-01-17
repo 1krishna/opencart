@@ -30,6 +30,11 @@
       {% endif %}</li>
     {% set i = i + 1 %}
     {% endfor %}
+
+    <li id="{{ farmer.id }}">{% if farmer.href %}<a href="{{ farmer.href }}"><i class="fa {{ farmer.icon }} fw"></i> {{ farmer.name }}</a>{% else %}<a href="#collapse{{ i }}" data-toggle="collapse" class="parent collapsed"><i class="fa {{ farmer.icon }} fw"></i> {{ farmer.name }}</a>{% endif %}
+      
+    </li>
+
   </ul>
   <div id="stats">
     <ul>

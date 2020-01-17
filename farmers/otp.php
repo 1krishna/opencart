@@ -14,10 +14,10 @@
         $email = $_POST['email'];
         $pwd = $_POST['pwd'];
         $num = $_POST['number'];
-        $stat = 0;
+        $stat = 1;
         $random = mt_rand(100000, 999999);
         $x=0;
-        $user="select oc_f_num from oc_farmer where oc_f_num=$num and oc_f_otp_status=1";
+        $user="select oc_f_num from oc_farmer where oc_f_num=91$num and oc_f_otp_status=1";
         $user = mysqli_query($conn, $user);
         $check_user = mysqli_num_rows($user);
         if ($check_user == 1) {
@@ -25,11 +25,11 @@
             header('Location: index.php?user');
         }
 
-        $check = "select oc_f_num from oc_farmer where oc_f_num=$num and oc_f_otp_status=0" ;
+        $check = "select oc_f_num from oc_farmer where oc_f_num=91$num and oc_f_otp_status=0" ;
         $check = mysqli_query($conn, $check);
         $check_num = mysqli_num_rows($check);
         if ($check_num ==1 ) {
-            $check_del = "delete from oc_farmer where oc_f_num=$num";
+            $check_del = "delete from oc_farmer where oc_f_num=91$num";
             mysqli_query($conn, $check_del);
         }
         if($x==0){
@@ -45,7 +45,7 @@
         $check_otp=mysqli_fetch_assoc($check_otp);
         if($check_otp['oc_f_otp']==$otp){
 
-            $otp_valid="update oc_farmer set oc_f_otp_status=1,oc_f_otp=0 where oc_f_num=$num";
+            $otp_valid="update oc_farmer set oc_f_otp_status=1,oc_f_otp=0 where oc_f_num=91$num";
             echo $otp_valid;
             if(mysqli_query($conn,$otp_valid)){
                 header('Location: index.php?otp=s');

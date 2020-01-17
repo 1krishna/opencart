@@ -11,11 +11,12 @@
 	<?php
 
 	if (isset($_POST['phnum']) && isset($_POST['passwd'])) {
-		$check = "SELECT * from `oc_farmer` where oc_f_num=" . '"' . $_POST['phnum'] . '"';
-		echo $check;
+		$check = "SELECT * from `oc_farmer` where oc_f_num=" . '"91' . $_POST['phnum'] . '"';
+		// echo $check;
 		$check = mysqli_query($conn, $check);
 		$login_row = mysqli_fetch_assoc($check);
-		if ($_POST['phnum'] == $login_row['oc_f_num'] && $_POST['passwd'] == $login_row['oc_f_password']) {
+		$phnum= '91'.$_POST['phnum'];
+		if ($phnum == $login_row['oc_f_num'] && $_POST['passwd'] == $login_row['oc_f_password']) {
 			if ($login_row['oc_f_otp_status'] == 0) {
 	?>
 				<script>
