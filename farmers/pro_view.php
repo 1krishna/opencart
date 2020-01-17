@@ -85,6 +85,7 @@
 											<th>Price</th>
 											<th>Update</th>
 											<th>Delete</th>
+											<th>Sold Out</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -96,6 +97,9 @@
 											<tr>
 												<td><?php echo $pro_row['name']; ?></td>
 												<td><?php echo 'Rs. ' . $pro_row['price'] . '/-'; ?></td>
+												<?php 
+													if($pro_row['status']==1){
+												?>
 												<td>
 													<form action="pro-add.php" method='post'>
 														<input type="hidden" value="<?php echo $pro_row['product_id']; ?>" name='product_id'>
@@ -105,6 +109,11 @@
 												<td>
 													<button type='button' class="btn btn-primary" onclick="del(<?php echo $pro_row['product_id']; ?>)">Delete</button>
 												</td>
+												<td><button type='button' class="btn btn-primary" onclick="sold(<?php echo $pro_row['product_id']; ?>)">Sold</button></td>
+												<?php } else if($pro_row['status']==0){
+												?>
+												<td colspan="3" align="center"> SOLD OUT </td>
+												<?php } ?>
 											</tr>
 										<?php } ?>
 									</tbody>
@@ -179,17 +188,38 @@
 			if (confirm("Confirm to Delete")) {
 				$.ajax({
 					url: 'queries/product.php',
-					dataType:'text',
-					type:'POST',
-					data:{
-						product_id:id,
-						product_del:''
+					dataType: 'text',
+					type: 'POST',
+					data: {
+						product_id: id,
+						product_del: ''
 					},
-					success:function(data){
+					success: function(data) {
 						alert(data);
-						window.location="pro_view.php";
+						window.location = "pro_view.php";
 					},
-					failure:function(data){
+					failure: function(data) {
+						alert("Problem While Deleting.");
+					}
+				});
+			}
+		}
+
+		function sold(id) {
+			if (confirm("Confirm That The Product Has Been Sold")) {
+				$.ajax({
+					url: 'queries/product.php',
+					dataType: 'text',
+					type: 'POST',
+					data: {
+						product_id: id,
+						product_sold: ''
+					},
+					success: function(data) {
+						alert(data);
+						window.location = "pro_view.php";
+					},
+					failure: function(data) {
 						alert("Problem While Deleting.");
 					}
 				});

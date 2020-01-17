@@ -8,7 +8,7 @@
 	$f_phnum = mysqli_query($conn,$f_phnum);
     $f_phnum = mysqli_fetch_assoc($f_phnum);
 	$enquiry = "INSERT INTO `oc_enquiry`(`pr_id`, `c_name`, `c_phnum`, `f_phnum`) VALUES ($pr_id,'$name',$phnum,'".$f_phnum['phnum']."')";
-    echo $enquiry;
+    // echo $enquiry;
 	$enquiry = mysqli_query($conn,$enquiry);
 	if($enquiry)
 	{
