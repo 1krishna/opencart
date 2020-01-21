@@ -148,7 +148,7 @@
 						</div>
 					<% } %>
 
-					<label class="col-sm-4 control-label" >
+					{# <label class="col-sm-4 control-label" >
 						{{ text_use_voucher }} 
 					</label>
 					<div class="col-sm-8">
@@ -158,7 +158,7 @@
 								<button class="btn btn-primary" id="confirm_voucher" type="button"><i class="fa fa-check"></i></button>
 							</span>
 						</div>
-					</div>
+					</div> #}
 				</div>
 				<% if(model.reward_points) { %>
 					<div class=" form-group qc-reward <%= parseInt(model.config.option.reward.display) ? '' : 'hidden' %>">

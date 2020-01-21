@@ -32,6 +32,12 @@ class ControllerExtensionModuleLatest extends Controller {
 					$price = false;
 				}
 
+				if($this->customer->isLogged()){
+					$data['logged']=1;
+				}else{
+					$data['logged']=0;
+				}
+
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 				} else {

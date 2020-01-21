@@ -1,7 +1,7 @@
 <?php
     include "../includes/connect.php";
     if(isset($_SESSION['farmer_num'])){
-
+        $mob=$_SESSION['farmer_num'];
         if(isset($_POST['product_add'])){
             
             $pro_id= $_POST['pro_id'];
@@ -29,7 +29,10 @@
             $add_store = "INSERT INTO `oc_product_to_store`(`product_id`, `store_id`) VALUES ($in_id,0)";
             $a4=mysqli_query($conn, $add_store);
             if($a1 && $a2 && $a3 && $a4 ){
-                echo "Product Added Successfully.";
+                $res=mysqli_insert_id($conn);
+				echo "Product Created Successfully". "<br>";
+				$message = "Product is Successfully added to the Website and Product id is:-"."$res";
+				include_once 'message.php';
             }
         }
 
@@ -55,7 +58,9 @@
             $a1=mysqli_query($conn, $add_disc);
         
             if($a1){
-                echo "Product Added Successfully.";
+                echo "Product Updated Successfully.";
+				$message = "Your Product  with Id". $product_id." is Successfully Updated.";
+                include_once 'message.php';
             }
         }
 
@@ -79,6 +84,8 @@
             $a5=mysqli_query($conn, $del_store);
             if($a1 && $a2 && $a3 && $a4 && $a5){
                 echo "Deleted Successfully";
+				$message = "Product is Successfully Deleted.";
+                include_once 'message.php';
             }else{
                 echo "Failed To Delete";
             }
@@ -90,6 +97,8 @@
             $res = mysqli_query($conn,$query);
             if($res){
                 echo "Product Has been Sold";
+				$message = "Your Product  with Id". $product_id." is added to Sold Out Category";
+                include_once 'message.php';
             } else{
                 echo "Error! Occured";
             }

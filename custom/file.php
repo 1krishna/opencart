@@ -82,10 +82,7 @@
 
                         </script>
                         <?php
-                        $res=mysqli_insert_id($conn);
-                        echo "Product Created Successfully". "<br>";
-                        $message = "Product is Successfully added to the Website and Product id is:-"."$res";
-                        include_once 'message.php';
+						echo "Product Created Successfully". "<br>";
                       } 
                       else
                       {
@@ -101,34 +98,45 @@
                     {
                         if(count($a)==3)
                         {
-                            ?>
-                            <script>
-                            del(<?php echo $a[2]; ?>);
-                            function del(id) 
-                            {
-                                
-                                    $.ajax({
-                                        url: '../farmers/queries/product.php',
-                                        dataType: 'text',
-                                        type: 'POST',
-                                        data: {
-                                            product_id: id,
-                                            product_del: ''
-                                        },
-                                        success: function(data) {
-                                            console.log(data);
-                                        },
-                                        failure: function(data) {
-                                            console.log("Problem While Deleting.");
-                                        }
-                                    });
-                                
+							$v1="select * from oc_product where product_id=".$a[2];
+							$v1=mysqli_query($conn,$v1);
+							$phn=mysqli_fetch_assoc($v1);
+							if(($phn['phnum']==$mob) && ($phn['status'] == 0) && ($phn['quantity'] == 0)){
+									?>
+									<script>
+									del(<?php echo $a[2]; ?>);
+									function del(id) 
+									{
+										
+											$.ajax({
+												url: '../farmers/queries/product.php',
+												dataType: 'text',
+												type: 'POST',
+												data: {
+													product_id: id,
+													product_del: ''
+												},
+												success: function(data) {
+													console.log(data);
+												},
+												failure: function(data) {
+													console.log("Problem While Deleting.");
+												}
+											});
+										
+									}
+									</script>
+									<?php
+									echo "Product Deleted Successfully". "<br>";
                             }
-                            </script>
-                            <?php
-                            echo "Product Deleted Successfully". "<br>";
-                            $message = "Product is Successfully Deleted.";
-                            include_once 'message.php';  
+                            else
+							{
+								echo "Unable to Delete Product". "<br>";
+								//   echo count($a);
+								$message = "Unable to delete a Product";
+								include_once 'message.php';	
+							}
+							
                         }
                         else
                         {
@@ -143,6 +151,10 @@
                     {
                         if(count($a)==5)
                         {
+							$v1="select * from oc_product where product_id=".$a[2];
+							$v1=mysqli_query($conn,$v1);
+							$phn=mysqli_fetch_assoc($v1);
+							if(($phn['phnum']==$mob) && ($phn['status'] == 0) && ($phn['quantity'] == 0)){
                             ?>
                         <script>
                             upd(<?php echo $a[2].",".$a[3].",".$a[4] ?>);
@@ -178,9 +190,14 @@
                         <?php
 
                                 echo "Product Updated Successfully.". "<br>";
-                                $message = "Your Product  with Id". $a[2]." is Successfully Updated.";
-                                include_once 'message.php';
-                            
+							}
+							else{
+								echo "Unable to Update Product". "<br>";
+								//   echo count($a);
+								$message = "Unable to Update Product";
+								include_once 'message.php';
+								
+							}
 
                         }
                         else{
@@ -192,34 +209,44 @@
                     else if($a[1]=="SOLD")
                     {
                         if(count($a) == 3){ 
-                        ?>
-                        <script>
-                            sold(<?php echo $a[2]; ?>);
-                            function sold(id) {
-                                if (true) {
-                                    $.ajax({
-                                        url: '../farmers/queries/product.php',
-                                        dataType: 'text',
-                                        type: 'POST',
-                                        data: {
-                                            product_id: id,
-                                            product_sold: ''
-                                        },
-                                        success: function(data) {
-                                            console.log(data);
-                                        },
-                                        failure: function(data) {
-                                            console.log("Problem While Moving to Sold.");
-                                        }
-                                    });
-                                }
-                            }
+						    $v1="select * from oc_product where product_id=".$a[2];
+							$v1=mysqli_query($conn,$v1);
+							$phn=mysqli_fetch_assoc($v1);
+							if(($phn['status'] == 0) && ($phn['quantity'] == 0) && ($phn['phnum']==$mob)) {
+								?>
+								<script>
+									sold(<?php echo $a[2]; ?>);
+									function sold(id) {
+										if (true) {
+											$.ajax({
+												url: '../farmers/queries/product.php',
+												dataType: 'text',
+												type: 'POST',
+												data: {
+													product_id: id,
+													product_sold: ''
+												},
+												success: function(data) {
+													console.log(data);
+												},
+												failure: function(data) {
+													console.log("Problem While Moving to Sold.");
+												}
+											});
+										}
+									}
 
-                        </script>
-                         <?php
-                         echo "Product is Added to Sold out Category". "<br>";
-                         $message = "Your Product  with Id". $a[2]." is added to Sold Out Category";
-                         include_once 'message.php';
+								</script>
+								 <?php
+								 echo "Product is Added to Sold out Category". "<br>";
+							}
+							else{
+								echo "Unable to Add Product Sold Out Category,". "<br>";
+								$message = "Unable to Add Product Sold Out Category,";
+								include_once 'message.php';
+							}
+							
+                         
                         }
                         else{
                             echo "Invalid Number of Fields". "<br>";
