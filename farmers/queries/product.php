@@ -1,7 +1,14 @@
 <?php
     include "../includes/connect.php";
-    if(isset($_SESSION['farmer_num'])){
-        $mob=$_SESSION['farmer_num'];
+    if((isset($_SESSION['farmer_num'])) || (isset($_POST['number']))){
+        if(isset($_SESSION['farmer_num'])){
+            $mob=$_SESSION['$farmer_num'];
+        }
+        else if(isset($_POST['number']))
+        {
+            $mob=$_POST['number'];  
+        }
+
         if(isset($_POST['product_add'])){
             
             $pro_id= $_POST['pro_id'];
@@ -13,7 +20,7 @@
             $model = mysqli_query($conn, $model);
             $model = mysqli_fetch_assoc($model);
             
-            $add_pro = "INSERT INTO `oc_product`(`model`,phnum,pro_id, qnt,`sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `viewed`, date_added,date_modified	) VALUES ('" . $model['pro_name'] . "','".$_SESSION['farmer_num']."',$pro_id , $pro_quantity,'', '', '', '', '', '', '', 1, 7, '" . $model['pro_img'] . "', 0, 1, '$pro_price', 0, 0, '" . date("Y-m-d") . "', 0, 1, 0, 0, 0, 1, 1, 1, 1, 1,1,'2009-02-03 16:06:50','2009-02-03 16:06:50')";
+            $add_pro = "INSERT INTO `oc_product`(`model`,phnum,pro_id, qnt,`sku`, `upc`, `ean`, `jan`, `isbn`, `mpn`, `location`, `quantity`, `stock_status_id`, `image`, `manufacturer_id`, `shipping`, `price`, `points`, `tax_class_id`, `date_available`, `weight`, `weight_class_id`, `length`, `width`, `height`, `length_class_id`, `subtract`, `minimum`, `sort_order`, `status`, `viewed`, date_added,date_modified	) VALUES ('" . $model['pro_name'] . "','".$mob."',$pro_id , $pro_quantity,'', '', '', '', '', '', '', 1, 7, '" . $model['pro_img'] . "', 0, 1, '$pro_price', 0, 0, '" . date("Y-m-d") . "', 0, 1, 0, 0, 0, 1, 1, 1, 1, 1,1,'2009-02-03 16:06:50','2009-02-03 16:06:50')";
             $add_pro = mysqli_query($conn, $add_pro);
             $in_id = mysqli_insert_id($conn);
         
@@ -29,9 +36,8 @@
             $add_store = "INSERT INTO `oc_product_to_store`(`product_id`, `store_id`) VALUES ($in_id,0)";
             $a4=mysqli_query($conn, $add_store);
             if($a1 && $a2 && $a3 && $a4 ){
-                $res=mysqli_insert_id($conn);
 				echo "Product Created Successfully". "<br>";
-				$message = "Product is Successfully added to the Website and Product id is:-"."$res";
+				$message = "Product is Successfully added to the Website and Product id is:-"."$in_id";
 				include_once 'message.php';
             }
         }

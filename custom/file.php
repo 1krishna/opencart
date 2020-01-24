@@ -21,7 +21,8 @@
             // $str=explode(" ",$str);
             $time=$entry->pubDate;
             $mob=$entry->title;
-            $valid="Select * from oc_farmer where oc_f_num='$mob'";
+            $valid="Select * from oc_farmer where oc_f_num='$mob' and oc_f_status=0 and oc_f_otp_status=1";
+            // echo $valid;
             $v=mysqli_query($conn,$valid);
             $rowcountf=mysqli_num_rows($v);
             $a = explode(' ', $str);
@@ -51,12 +52,13 @@
                         
                         ?>
                         <script>
-                            add_product(<?php echo $a[2].",".$a[3].",".$a[4] ?>);
-                            function add_product(pro_id,pro_quantity,pro_price) 
+                            add_product(<?php echo $a[2].",".$a[3].",".$a[4].",".$mob ?>);
+                            function add_product(pro_id,pro_quantity,pro_price,number) 
                             {
                                     var pro_id = pro_id;
                                     var pro_quantity = pro_quantity;
                                     var pro_price = pro_price;
+                                    var number=number;
 
                                     var ret = true;
                                     
@@ -66,6 +68,7 @@
                                             pro_id: pro_id,
                                             pro_quantity: pro_quantity,
                                             pro_price: pro_price,
+                                            number:number,
                                             product_add: ''
                                         },
                                         dataType: 'text',
@@ -101,11 +104,11 @@
 							$v1="select * from oc_product where product_id=".$a[2];
 							$v1=mysqli_query($conn,$v1);
 							$phn=mysqli_fetch_assoc($v1);
-							if(($phn['phnum']==$mob) && ($phn['status'] == 0) && ($phn['quantity'] == 0)){
+							if(($phn['phnum']==$mob) && ($phn['status'] == 1) && ($phn['quantity'] == 1)){
 									?>
 									<script>
-									del(<?php echo $a[2]; ?>);
-									function del(id) 
+									del(<?php echo $a[2].",".$mob ; ?>);
+									function del(id,number) 
 									{
 										
 											$.ajax({
@@ -114,6 +117,7 @@
 												type: 'POST',
 												data: {
 													product_id: id,
+                                                    number:number,
 													product_del: ''
 												},
 												success: function(data) {
@@ -147,6 +151,47 @@
                             
                         }  
                     }
+                    else if($a[1] == "SELL")
+                    {
+                        if(count($a)==3)
+                        {
+                            $v1="SELECT * FROM `oc_category_description` where upper(name)='$a[2]'";
+                            // echo $v1;
+                            $v1=mysqli_query($conn,$v1);
+							$phn=mysqli_num_rows($v1);
+                            if($phn!=0)
+                            {
+                                $v2="select category_id from `oc_category_description` where upper(name)='$a[2]'";
+                                $v2=mysqli_query($conn,$v2);
+                                $catid=mysqli_fetch_assoc($v2);
+                                $v3="select pro_name,pro_id from oc_pro where pro_category=".$catid['category_id'];
+                                $v3=mysqli_query($conn,$v3);
+                                $message="\n"."The Product Names and The Respecitve Codes are :"."\n";
+                                while($a=mysqli_fetch_assoc($v3))
+                                {
+                                 $message=$message.($a['pro_name'] . ":" .$a['pro_id']."\n");    
+                                }
+                                echo strlen($message)."<br>";
+                                include_once 'message.php';
+
+
+                            }
+                            else{
+                                echo "Invalid Category"."<br>";
+                                $message = "Invalid Category";
+                                include_once 'message.php';
+                            }
+							
+                        }
+                        else
+                        {
+                            echo "Invalid Number of Fields". "<br>";
+                            //   echo count($a);
+                            $message = "Invalid Number of Fields";
+                            include_once 'message.php';
+                            
+                        }  
+                    }
                     else if($a[1]=="UPD")
                     {
                         if(count($a)==5)
@@ -154,11 +199,11 @@
 							$v1="select * from oc_product where product_id=".$a[2];
 							$v1=mysqli_query($conn,$v1);
 							$phn=mysqli_fetch_assoc($v1);
-							if(($phn['phnum']==$mob) && ($phn['status'] == 0) && ($phn['quantity'] == 0)){
+							if(($phn['phnum']==$mob) && ($phn['status'] == 1) && ($phn['quantity'] == 1)){
                             ?>
                         <script>
-                            upd(<?php echo $a[2].",".$a[3].",".$a[4] ?>);
-                            function upd(pro_id,pro_quantity,pro_price) 
+                            upd(<?php echo $a[2].",".$a[3].",".$a[4].",".$mob ?>);
+                            function upd(pro_id,pro_quantity,pro_price,number) 
                             {
                                     var product_id = pro_id;
                                     var pro_quantity = pro_quantity;
@@ -172,6 +217,7 @@
                                         product_id: product_id,
                                         pro_quantity: pro_quantity,
                                         pro_price: pro_price,
+                                        number:number,
                                         product_upd: ''
                                     },
                                     dataType: 'text',
@@ -212,11 +258,11 @@
 						    $v1="select * from oc_product where product_id=".$a[2];
 							$v1=mysqli_query($conn,$v1);
 							$phn=mysqli_fetch_assoc($v1);
-							if(($phn['status'] == 0) && ($phn['quantity'] == 0) && ($phn['phnum']==$mob)) {
+							if(($phn['status'] == 1) && ($phn['quantity'] == 1) && ($phn['phnum']==$mob)) {
 								?>
 								<script>
-									sold(<?php echo $a[2]; ?>);
-									function sold(id) {
+									sold(<?php echo $a[2].",".$mob ; ?>);
+									function sold(id,number) {
 										if (true) {
 											$.ajax({
 												url: '../farmers/queries/product.php',
@@ -224,6 +270,7 @@
 												type: 'POST',
 												data: {
 													product_id: id,
+                                                    number:number,
 													product_sold: ''
 												},
 												success: function(data) {
