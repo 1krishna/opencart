@@ -16,7 +16,7 @@
             break;
             }
             // echo "<li><a href='$entry->link' title='$entry->title'>" . $entry->title . "</a></li>";
-            echo $i.".)".$entry->description. " ,,,,,  ";
+            echo $i.".)".$entry->description. " ......... ";
             $str= $entry->description;
             // $str=explode(" ",$str);
             $time=$entry->pubDate;
@@ -40,7 +40,7 @@
                     // echo "$query1";
                     $q1=mysqli_query($conn,$query1);
                     if($q1){
-                        echo "Not Found Inserted into Message Table". ",,,,,";
+                        echo "..Not Found Inserted into Message Table..";
                     }
                     if($a[1] == "ADD")
                     {
@@ -85,13 +85,13 @@
 
                         </script>
                         <?php
-						echo "Product Created Successfully". "<br>";
+						echo "..Product Created Successfully..". "<br>";
                       } 
                       else
                       {
-                        echo "Invalid Number of Fields". "<br>";
+                        echo "..Unable to ADD product!..". "<br>";
                         //   echo count($a);
-                        $message = "Invalid Number of Fields";
+                        $message = "Unable to add product! Message format is ADD <product id> <quantity> <price>. Please check again.";
                         include_once 'message.php';
                           
                       } 
@@ -131,22 +131,22 @@
 									}
 									</script>
 									<?php
-									echo "Product Deleted Successfully". "<br>";
+									echo "..Product Deleted Successfully..". "<br>";
                             }
                             else
 							{
-								echo "Unable to Delete Product". "<br>";
+								echo "..Unable to delete Product..". "<br>";
 								//   echo count($a);
-								$message = "Unable to delete a Product";
+								$message = "Unable to delete Product. It may not belong to you or may be some other reason. Please check again.";
 								include_once 'message.php';	
 							}
 							
                         }
                         else
                         {
-                            echo "Invalid Number of Fields". "<br>";
+                            echo "Unable to Delete Product!". "<br>";
                             //   echo count($a);
-                            $message = "Invalid Number of Fields";
+                            $message = "Unable to delete Product! Message format is DEL <product id that is given at Product ADDITION>. Please check again.";
                             include_once 'message.php';
                             
                         }  
@@ -177,7 +177,7 @@
 
                             }
                             else{
-                                echo "Invalid Category"."<br>";
+                                echo "..Invalid Category.."."<br>";
                                 $message = "Invalid Category";
                                 include_once 'message.php';
                             }
@@ -185,9 +185,9 @@
                         }
                         else
                         {
-                            echo "Invalid Number of Fields". "<br>";
+                            echo "..Unable to DELETE product..". "<br>";
                             //   echo count($a);
-                            $message = "Invalid Number of Fields";
+                            $message = "Unable to sell product! Message format is SELL <CATEGORY NAME>. Please check again.";
                             include_once 'message.php';
                             
                         }  
@@ -235,10 +235,10 @@
                         </script>
                         <?php
 
-                                echo "Product Updated Successfully.". "<br>";
+                                echo "..Product Updated Successfully..". "<br>";
 							}
 							else{
-								echo "Unable to Update Product". "<br>";
+								echo "..Unable to Update Product..". "<br>";
 								//   echo count($a);
 								$message = "Unable to Update Product";
 								include_once 'message.php';
@@ -247,14 +247,15 @@
 
                         }
                         else{
-                            echo "Invalid Number of Fields". "<br>";
-                            $message = "Invalid Number of Fields";
+                            echo "..Unable to UPDATE product..". "<br>";
+                            $message = "Unable to update product! Message format is UPD <product id that is given at Product ADDITION> <quantity> <price>. Please check again. ";
                             include_once 'message.php';
                         }
                     }
                     else if($a[1]=="SOLD")
                     {
-                        if(count($a) == 3){ 
+                        if(count($a) == 3)
+                        { 
 						    $v1="select * from oc_product where product_id=".$a[2];
 							$v1=mysqli_query($conn,$v1);
 							$phn=mysqli_fetch_assoc($v1);
@@ -285,10 +286,10 @@
 
 								</script>
 								 <?php
-								 echo "Product is Added to Sold out Category". "<br>";
+								 echo "..Product is Added to Sold out Category..". "<br>";
 							}
 							else{
-								echo "Unable to Add Product Sold Out Category,". "<br>";
+								echo "..Unable to Add Product Sold Out Category..". "<br>";
 								$message = "Unable to Add Product Sold Out Category,";
 								include_once 'message.php';
 							}
@@ -296,23 +297,22 @@
                          
                         }
                         else{
-                            echo "Invalid Number of Fields". "<br>";
-                            $message = "Invalid Number of Fields";
+                            echo "..Unable to UPDATE product..". "\n";
+                            $message = "Unable to process! Format may be incorrect. Please try again.Message format is SOLD <product id>.";
                             include_once 'message.php';
-
                         }
 
                     }
                     else
                     {
-                        echo "Invalid Message!Please Enter in the Message Format.". "<br>";
-                        $message = "Invalid Number of Fields"."<br><br>";
+                        echo "..Invalid Message! Please Enter in the Message Format..". "<br>";
+                        $message = "Invalid format! Message format is <SELL/ADD/UPD/DEL/SOLD> <CATEGORY NAME/product id> <quantity> <price> respectively."."\n"."- Kisan Kart Team";
                         include_once 'message.php'; 
                     }       
                 }
                 else
                 {
-                    echo "Message Already Inserted into DB". "<br><br>";
+                    echo "..Message Already Inserted into DB..". "<br><br>";
                 }
                 
                 
@@ -329,14 +329,14 @@
                     echo "Invalid user";
                     $q1=mysqli_query($conn,$query1);
                             if($q1){
-                                echo "Not Found So Inserted". "<br><br>";
-                                $message = "You are not a valid user.Please register in the website";
+                                echo "..Not Found So Inserted..". "<br><br>";
+                                $message = "You are not a valid user.Please register on the website: <URL>";
                                 include_once 'message.php';
                             }
                     
                 }
                 else{
-                    echo "Invalid user"."Already inserted"."<br>";
+                    echo "..Invalid user. Already inserted.."."<br>";
                 }
             }
             

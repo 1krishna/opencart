@@ -1,16 +1,16 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/opencart/');
+define('HTTP_SERVER', 'http://localhost/kisancart/');
 // define('HTTP_SERVER', 'http://192.168.1.8/opencart/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost/opencart/');
+define('HTTPS_SERVER', 'http://localhost/kisancart/');
 // define('HTTPS_SERVER', 'http://192.168.1.8/opencart/');
 
 // DIR
-define('DIR_APPLICATION', 'C:/wamp64/www/opencart/catalog/');
-define('DIR_SYSTEM', 'C:/wamp64/www/opencart/system/');
-define('DIR_IMAGE', 'C:/wamp64/www/opencart/image/');
+define('DIR_APPLICATION', 'C:/wamp64/www/kisancart/catalog/');
+define('DIR_SYSTEM', 'C:/wamp64/www/kisancart/system/');
+define('DIR_IMAGE', 'C:/wamp64/www/kisancart/image/');
 define('DIR_STORAGE', DIR_SYSTEM . 'storage/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/theme/');

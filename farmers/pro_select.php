@@ -65,8 +65,14 @@
 
 			<section role="main" class="content-body">
 				<header class="page-header">
-					<h2>Faculty</h2>
+					<h2>Select Product</h2>
 				</header>
+				<?php
+				$mob=$_SESSION['farmer_num'];
+				$q1="select ocd.name as name from oc_product oc,oc_product_to_category opc,oc_category_description ocd where oc.phnum='$mob' and oc.product_id=opc.product_id and opc.category_id=ocd.category_id group by ocd.category_id;";
+				$q1=mysqli_query($conn,$q1);
+				$r1=mysqli_num_rows($q1);
+				?>
 
 				<!-- start: page -->
 				<div class="row">
@@ -76,26 +82,21 @@
 								<h2 class="card-title"><?php if (isset($_POST['farmer_num'])) {
 															echo "Update";
 														} else {
-															echo "Add";
+														echo "Select";
 														} ?> Product</h2>
 							</header>
 							<div class="card-body">
+							  <form action="pro-add.php" method="POST">
 
 								<div class="form-group row">
 									<label class="col-lg-3 control-label text-lg-right pt-2">Product Category<span class="required">*</span></label>
 									<div class="col-lg-6">
-										<select data-plugin-selectTwo class="form-control populate" id='pro_category'>
+										<select data-plugin-selectTwo class="form-control populate" id='pro_category' onblur="selectCat();">
 											<option value=""> --SELECT-- </option>
-											<?php
-											$dept = "SELECT * FROM `department` WHERE 1";
-											$dept = mysqli_query($conn, $dept);
-											while ($dept_row = mysqli_fetch_assoc($dept)) {
+											<?php	
+											while ($dept_row = mysqli_fetch_assoc($q1)) {
 												?>
-												<option value="<?php echo $dept_row['dept_id']; ?>" <?php if (isset($_POST['farmer_num'])) {
-																										if ($fac_row['dept_id'] == $dept_row['dept_id']) {
-																											echo "selected";
-																										}
-																									} ?>> <?php echo $dept_row['dept_name']; ?> </option>
+												<option value="<?php echo $dept_row['name']; ?>" > <?php echo $dept_row['name']; ?> </option>
 											<?php } ?>
 										</select>
 										<div id="cat_err" style="color:red"></div>
@@ -104,19 +105,9 @@
 						        <div class="form-group row">
 									<label class="col-lg-3 control-label text-lg-right pt-2">Select Product<span class="required">*</span></label>
 									<div class="col-lg-6">
-										<select data-plugin-selectTwo class="form-control populate" id='pro_name'>
+										<select data-plugin-selectTwo class="form-control populate" id='pro_name' name="product_id">
 											<option value="--SELECT--"> --SELECT-- </option>
-											<?php
-											$dept = "SELECT * FROM `department` WHERE 1";
-											$dept = mysqli_query($conn, $dept);
-											while ($dept_row = mysqli_fetch_assoc($dept)) {
-												?>
-												<option value="<?php echo $dept_row['dept_id']; ?>" <?php if (isset($_POST['farmer_num'])) {
-																										if ($fac_row['dept_id'] == $dept_row['dept_id']) {
-																											echo "selected";
-																										}
-																									} ?>> <?php echo $dept_row['dept_name']; ?> </option>
-											<?php } ?>
+											
 										</select>
 										<div id="sel_err" style="color:red"></div>
 									</div>
@@ -129,15 +120,16 @@
 										if (isset($_POST['farmer_num'])) {
 											echo "<button class='btn btn-primary' id='update' style='width:100%;' onclick='upd();'>Update</button>";
 										} else {
-											echo "<button class='btn btn-primary' id='add' style='width:100%;' onclick='add();'>Add Member</button>";
+											echo "<button class='btn btn-primary' id='add' style='width:100%;' onclick='add();'>Select</button>";
 										}
 										?>
 									</div>
-									<input type="hidden" value="<?php if (isset($_POST['farmer_num'])) {
+									<!-- <input type="hidden" value="<?php if (isset($_POST['farmer_num'])) {
 																	echo $_POST['farmer_num'];
-																} ?>" id='farmer_num'>
+																} ?>" id='farmer_num'> -->
 									<div class="col-lg-3"></div>
 								</div>
+                               </form>
 							</div>
 						</section>
 					</div>
@@ -197,6 +189,45 @@
 	<!-- Examples -->
 	<script src="js/examples/examples.dashboard.js"></script>
 	<script>
+	function selectCat()
+	{
+		var procat = $('#pro_category').val();
+		var mySelect = $('#pro_name');
+		// alert(procat);
+		$.ajax({
+				url: 'queries/product.php',
+				data: {
+					procat:procat,
+					product_sel: ''
+				},
+				dataType: 'text',
+				type: 'post',
+				success: function(data) {
+					 //console.log(data);
+					 $(mySelect).empty();
+					var res = data.split("@");
+
+					// console.log(res);
+					res.shift();
+					// console.log(res);
+
+					$.each(res, function(res, res) {
+					res=res.split("$");
+					//console.log(res);
+					mySelect.append(`<option value="${res[1]}"> 
+                                       ${res[0]} 
+                                  </option>`); 
+					
+				});
+				},
+				failure: function(data) {
+					alert('Error While Selecting Product.');
+				}
+			});
+		
+	}
+	</script>
+	<script>
 		function add() {
 
 			var fac_dept = $('#pro_category').val();
@@ -220,7 +251,7 @@
 			if (ret == false) {
 				return false;
 			}
-			getrequest("queries/faculty.php", "fac_name=" + fac_name + "&fac_passwd=" + fac_passwd + "&fac_mail=" + fac_mail + "&fac_dept=" + fac_dept + "&fac_role=" + fac_role + "&add_fac=''", "fac-view.php");
+			// getrequest("queries/faculty.php", "fac_name=" + fac_name + "&fac_passwd=" + fac_passwd + "&fac_mail=" + fac_mail + "&fac_dept=" + fac_dept + "&fac_role=" + fac_role + "&add_fac=''", "fac-view.php");
 			// window.location = "";
 		}
 

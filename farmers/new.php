@@ -19,13 +19,13 @@
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                    <img src="/opencart/farmers/images/farm-6" class="d-block w-100" alt="..." style="height:250px;border: 3px solid #ccc;">
+                    <img src="/kisancart/farmers/images/farm-6" class="d-block w-100" alt="..." style="height:250px;border: 3px solid #ccc;">
                     </div>
                     <div class="carousel-item">
-                    <img src="/opencart/farmers/images/farm-4" class="d-block w-100" alt="..." style="height:250px;border: 3px solid #ccc;">
+                    <img src="/kisancart/farmers/images/farm-4" class="d-block w-100" alt="..." style="height:250px;border: 3px solid #ccc;">
                     </div>
                     <div class="carousel-item">
-                    <img src="/opencart/farmers/images/farm-5" class="d-block w-100" alt="..." style="height:250px;border: 3px solid #ccc;">
+                    <img src="/kisancart/farmers/images/farm-5" class="d-block w-100" alt="..." style="height:250px;border: 3px solid #ccc;">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -87,13 +87,13 @@
   </ol>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="/opencart/farmers/images/farm-5" class="d-block w-100" alt="...">
+      <img src="/kisancart/farmers/images/farm-5" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="/opencart/farmers/images/farm-5" class="d-block w-100" alt="...">
+      <img src="/kisancart/farmers/images/farm-5" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="/opencart/farmers/images/farm-5" class="d-block w-100" alt="...">
+      <img src="/kisancart/farmers/images/farm-5" class="d-block w-100" alt="...">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

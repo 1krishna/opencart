@@ -4,7 +4,7 @@
 
 			<ul class="nav nav-main">
 				<li>
-					<a class="nav-link" href="pro_view.php">
+					<a class="nav-link" href="dashboard.php">
 						<i class="fa fa-home" aria-hidden="true"></i>
 						<span>Dashboard</span>
 					</a>
@@ -20,6 +20,13 @@
 					<a class="nav-link" href="pro_select.php">
 						<i class="fa fa-check" aria-hidden="true"></i>
 						<span>Select Product</span>
+					</a>
+				</li>
+                
+                <li>
+					<a class="nav-link" href="pro_view.php">
+						<i class="fa fa-database" aria-hidden="true"></i>
+						<span>View My Products</span>
 					</a>
 				</li>
 

@@ -1,11 +1,14 @@
 <?php
     include "../includes/connect.php";
-    if((isset($_SESSION['farmer_num'])) || (isset($_POST['number']))){
+    if(!isset($_SESSION)){session_start();}
+    if(  (isset($_SESSION['farmer_num'])) || (isset($_POST['number']))  ){
+        
         if(isset($_SESSION['farmer_num'])){
-            $mob=$_SESSION['$farmer_num'];
+            $mob=$_SESSION['farmer_num'];
         }
         else if(isset($_POST['number']))
         {
+            
             $mob=$_POST['number'];  
         }
 
@@ -37,7 +40,7 @@
             $a4=mysqli_query($conn, $add_store);
             if($a1 && $a2 && $a3 && $a4 ){
 				echo "Product Created Successfully". "<br>";
-				$message = "Product is Successfully added to the Website and Product id is:-"."$in_id";
+				$message = "Product is added successfully to the Website. Product id is: "."$in_id"."\n"."Remember to use this ID to UPDATE/SELL/SOLD/DELETE your product.";
 				include_once 'message.php';
             }
         }
@@ -65,9 +68,28 @@
         
             if($a1){
                 echo "Product Updated Successfully.";
-				$message = "Your Product  with Id". $product_id." is Successfully Updated.";
+				$message = "Your Product  with Id: ". $product_id." has Successfully Updated.";
                 include_once 'message.php';
             }
+        }
+
+        if(isset($_POST['product_sel'])){
+            
+            $msg="";
+
+            $procat= $_POST['procat'];
+                        
+            $pro_details = "select opd.name,opd.product_id as id,op.phnum as phnum from oc_product_to_category optc,oc_product op,oc_product_description opd where optc.category_id=(SELECT ocd1.category_id from oc_category_description ocd1 where ocd1.name='$procat') and optc.product_id=opd.product_id and opd.product_id=op.product_id and phnum='$mob'";
+
+             echo $pro_details;
+            
+            $pro_details = mysqli_query($conn,$pro_details);
+            while($pro1= mysqli_fetch_assoc($pro_details))
+            {
+                $msg = $msg."@".$pro1['name']."$".$pro1['id'];
+                
+            }
+            echo $msg;
         }
 
         if(isset($_POST['product_del'])){
@@ -90,7 +112,7 @@
             $a5=mysqli_query($conn, $del_store);
             if($a1 && $a2 && $a3 && $a4 && $a5){
                 echo "Deleted Successfully";
-				$message = "Product is Successfully Deleted.";
+				$message = "Product has been Deleted Successfully.";
                 include_once 'message.php';
             }else{
                 echo "Failed To Delete";
@@ -103,7 +125,7 @@
             $res = mysqli_query($conn,$query);
             if($res){
                 echo "Product Has been Sold";
-				$message = "Your Product  with Id". $product_id." is added to Sold Out Category";
+				$message = "Your Product  with Id: ". $product_id." has been added to Sold Out Category";
                 include_once 'message.php';
             } else{
                 echo "Error! Occured";

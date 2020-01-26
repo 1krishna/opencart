@@ -1,18 +1,18 @@
 <?php
 // HTTP
-define('HTTP_SERVER', 'http://localhost/opencart/admin/');
-define('HTTP_CATALOG', 'http://localhost/opencart/');
+define('HTTP_SERVER', 'http://localhost/kisancart/admin/');
+define('HTTP_CATALOG', 'http://localhost/kisancart/');
 
 // HTTPS
-define('HTTPS_SERVER', 'http://localhost/opencart/admin/');
-define('HTTPS_CATALOG', 'http://localhost/opencart/');
+define('HTTPS_SERVER', 'http://localhost/kisancart/admin/');
+define('HTTPS_CATALOG', 'http://localhost/kisancart/');
 
 // DIR
-define('DIR_APPLICATION', 'C:/wamp64/www/opencart/admin/');
-define('DIR_SYSTEM', 'C:/wamp64/www/opencart/system/');
-define('DIR_IMAGE', 'C:/wamp64/www/opencart/image/');
+define('DIR_APPLICATION', 'C:/wamp64/www/kisancart/admin/');
+define('DIR_SYSTEM', 'C:/wamp64/www/kisancart/system/');
+define('DIR_IMAGE', 'C:/wamp64/www/kisancart/image/');
 define('DIR_STORAGE', DIR_SYSTEM . 'storage/');
-define('DIR_CATALOG', 'C:/wamp64/www/opencart/catalog/');
+define('DIR_CATALOG', 'C:/wamp64/www/kisancart/catalog/');
 define('DIR_LANGUAGE', DIR_APPLICATION . 'language/');
 define('DIR_TEMPLATE', DIR_APPLICATION . 'view/template/');
 define('DIR_CONFIG', DIR_SYSTEM . 'config/');

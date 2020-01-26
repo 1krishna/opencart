@@ -22,8 +22,8 @@
 		// Data for text message. This is the text message data.
 		$sender = "TXTLCL"; // This is who the message appears to be from.
 		$numbers = "$mob"; // A single number or a comma-seperated list of numbers
-		$message = "You had Recieved the Product Enquiry from the number"."$phnum";
-		// 612 chars or less
+		$message = "Your products have been inquired by a Customer. Call "."$phnum"." to contact with the Customer.";
+		// 612 chars or less 
 		// A single number or a comma-seperated list of numbers
 		$message = urlencode($message);
 		$data = "username=" . $username . "&hash=" . $hash . "&message=" . $message . "&sender=" . $sender . "&numbers=" . $numbers . "&test=" . $test;
@@ -40,3 +40,4 @@
 	}
 	
 ?>
+
