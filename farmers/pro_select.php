@@ -91,7 +91,7 @@
 								<div class="form-group row">
 									<label class="col-lg-3 control-label text-lg-right pt-2">Product Category<span class="required">*</span></label>
 									<div class="col-lg-6">
-										<select data-plugin-selectTwo class="form-control populate" id='pro_category' onblur="selectCat();">
+										<select data-plugin-selectTwo class="form-control populate" id='pro_category' onfocusout="selectCat();">
 											<option value=""> --SELECT-- </option>
 											<?php	
 											while ($dept_row = mysqli_fetch_assoc($q1)) {

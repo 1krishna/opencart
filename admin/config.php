@@ -32,5 +32,5 @@ define('DB_DATABASE', 'opencart');
 define('DB_PORT', '3306');
 define('DB_PREFIX', 'oc_');
 
-// OpenCart API
-define('OPENCART_SERVER', 'https://www.opencart.com/');
+// kisancart API
+define('kisancart_SERVER', 'https://www.kisancart.com/');

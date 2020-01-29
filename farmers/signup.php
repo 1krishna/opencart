@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label>E-mail Address<span class="required">*</span></label>
+                            <label>E-mail Address</label>
 							<input name="email" type="email" class="form-control form-control-lg" id="email"/>
 							<span id="email_err" style="color:red;"></span>
 							
@@ -112,7 +112,7 @@
                             <a class="btn btn-twitter mb-3 ml-1 mr-1" href="#">Connect with <i class="fab fa-twitter"></i></a>
                         </div> -->
 
-                        <p class="text-center">Already have an account? <a href="login.php">Sign In!</a></p>
+                        <p class="text-center">Already have an account? <a href="index.php">Sign In!</a></p>
 
                     </form>
                 </div>
@@ -165,16 +165,16 @@
 			  ret=false;
 			}
 
-			var atpos = email.indexOf("@");
-			var dotpos = email.lastIndexOf(".");
-			if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
-				document.getElementById("email_err").innerHTML = "Enter a Valid E-Mail!";
-				ret = false;
-			}
+			// var atpos = email.indexOf("@");
+			// var dotpos = email.lastIndexOf(".");
+			// if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= email.length) {
+			// 	document.getElementById("email_err").innerHTML = "Enter a Valid E-Mail!";
+			// 	ret = false;
+			// }
 
             if(number=="" || number.length != 10)
 			{
-				document.getElementById("number_err").innerHTML = "Enter a Valid Number!";
+				document.getElementById("number_err").innerHTML = "Enter a Valid Number (10 digit only)!";
 				ret = false;
 			}
 

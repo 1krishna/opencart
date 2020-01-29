@@ -1,12 +1,9 @@
 <?php
     include "../includes/connect.php";
     if(!isset($_SESSION)){session_start();}
-    if(  (isset($_SESSION['farmer_num'])) || (isset($_POST['number']))  ){
+    if(   (isset($_POST['number']))  ){
         
-        if(isset($_SESSION['farmer_num'])){
-            $mob=$_SESSION['farmer_num'];
-        }
-        else if(isset($_POST['number']))
+         if(isset($_POST['number']))
         {
             
             $mob=$_POST['number'];  
@@ -121,8 +118,10 @@
 
         if(isset($_POST['product_sold'])){
             $product_id = $_POST['product_id'];
-            $query = "UPDATE oc_product set status=0,quantity=0 where product_id=$product_id";
+            $query = "UPDATE oc_product set quantity=0 where product_id=$product_id";
             $res = mysqli_query($conn,$query);
+            $q5="INSERT INTO `oc_success`(`product_id`) VALUES (".$product_id.")";
+            $q6=mysqli_query($conn,$q5);
             if($res){
                 echo "Product Has been Sold";
 				$message = "Your Product  with Id: ". $product_id." has been added to Sold Out Category";

@@ -92,22 +92,27 @@
                       ADD Product via SMS
                     </div>
                       <p style="font-size:16px;">Send SMS to : 9220592205</p>
-                      <p  style="font-size:16px;">ADD Product_ID Product_Name Quantity(in KG)</p>
+                      <p  style="font-size:16px;">ADD  Product_ID  Quantity(in KG)  Price(in RS) </p>
                     <div class="alert alert-success" role="alert">
                       UPDATE Product via SMS
                     </div>
                       <p>Send SMS to : 9220592205</p>
-                      <p>UPDATE Product_ID Product_Name Quantity(in KG)</p>
+                      <p>UPD   Product_ID  Quantity(in KG)  Price(in RS) </p>
                     <div class="alert alert-danger" role="alert">
                       DELETE Product via SMS
                     </div>
                       <p>Send SMS to : 9220592205</p>
-                      <p>DELETE Product_ID Product_Name Quantity(in KG)</p>
+                      <p>DEL  Product_ID  </p>
                     <div class="alert alert-warning" role="alert">
-                      SELL Product via SMS
+                     To Know Product_Id                    
                     </div>
                       <p>Send SMS to : 9220592205</p>
-                      <p>SELL Category_Name</p>
+					  <p>SELL  Category_Name </p>
+					  <div class="alert alert-dark" role="alert">
+                      Product Sold Offline
+                    </div>
+                      <p>Send SMS to : 9220592205</p>
+                      <p>SOLD  Product_id </p>
                    </span>
 <!--                  </div>-->
                 </div>             

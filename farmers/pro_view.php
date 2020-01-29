@@ -90,7 +90,8 @@
 									</thead>
 									<tbody>
 										<?php
-										$product = "SELECT * FROM oc_product op,oc_product_description opd WHERE phnum='" . $_SESSION['farmer_num'] . "' and op.product_id=opd.product_id";
+										$product = "SELECT * FROM oc_product op,oc_product_description opd WHERE op.phnum='" . $_SESSION['farmer_num'] . "' and op.product_id=opd.product_id";
+										echo "<script>alert($product)</script>";
 										$product = mysqli_query($conn, $product);
 										while ($pro_row = mysqli_fetch_assoc($product)) {
 										?>
@@ -98,10 +99,11 @@
 												<td><?php echo $pro_row['name']; ?></td>
 												<td><?php echo 'Rs. ' . $pro_row['price'] . '/-'; ?></td>
 												<?php 
-													if($pro_row['status']==1){
+													if($pro_row['quantity']==1){
 												?>
 												<td>
 													<form action="pro-add.php" method='post'>
+														
 														<input type="hidden" value="<?php echo $pro_row['product_id']; ?>" name='product_id'>
 														<button type='submit' class="btn btn-primary">Update</button>
 													</form>
@@ -110,12 +112,15 @@
 													<button type='button' class="btn btn-primary" onclick="del(<?php echo $pro_row['product_id']; ?>)">Delete</button>
 												</td>
 												<td><button type='button' class="btn btn-primary" onclick="sold(<?php echo $pro_row['product_id']; ?>)">Sold</button></td>
-												<?php } else if($pro_row['status']==0){
+												<?php } else if($pro_row['quantity']==0){
 												?>
 												<td colspan="3" align="center"> SOLD OUT </td>
 												<?php } ?>
 											</tr>
 										<?php } ?>
+										<input type="hidden" value="<?php if (isset($_SESSION['farmer_num'])) {
+																	echo $_SESSION['farmer_num'];
+																} ?>" id='number'>
 									</tbody>
 								</table>
 							</div>
@@ -185,6 +190,7 @@
 	<script src="js/examples/examples.dashboard.js"></script>
 	<script>
 		function del(id) {
+			var number = $('#number').val();
 			if (confirm("Confirm to Delete")) {
 				$.ajax({
 					url: 'queries/product.php',
@@ -192,6 +198,7 @@
 					type: 'POST',
 					data: {
 						product_id: id,
+						number:number,
 						product_del: ''
 					},
 					success: function(data) {

@@ -1,11 +1,11 @@
 <?php
 // HTTP
 define('HTTP_SERVER', 'http://localhost/kisancart/');
-// define('HTTP_SERVER', 'http://192.168.1.8/opencart/');
+// define('HTTP_SERVER', 'http://192.168.1.8/kisancart/');
 
 // HTTPS
 define('HTTPS_SERVER', 'http://localhost/kisancart/');
-// define('HTTPS_SERVER', 'http://192.168.1.8/opencart/');
+// define('HTTPS_SERVER', 'http://192.168.1.8/kisancart/');
 
 // DIR
 define('DIR_APPLICATION', 'C:/wamp64/www/kisancart/catalog/');

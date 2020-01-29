@@ -38,7 +38,7 @@
 				$_SESSION['farmer_name'] = $login_row['oc_f_name'];
 				$_SESSION['farmer_num'] = $login_row['oc_f_num'];
 				$_SESSION['farmer_status'] = $login_row['oc_f_status'];
-				header('Location: pro_view.php');
+				header('Location: dashboard.php');
 			}
 		} else {
 			?>
@@ -110,7 +110,7 @@
 					<h2 class="title text-uppercase font-weight-bold m-0"><i class="fas fa-user mr-1"></i> LogIn</h2>
 				</div>
 				<div class="card-body">
-					<form action="index.php" method="post">
+					<form action="index.php" method="post" onsubmit="return validate();">
 						<div class="row">
 							<div class="col-sm-2"></div>
 							<div class="col-sm-10">
@@ -120,7 +120,7 @@
 						<div class="form-group mb-3">
 							<label>Mobile Number</label>
 							<div class="input-group">
-								<input name="phnum" type="text" class="form-control form-control-lg" />
+								<input name="phnum" id="phnum" type="text" class="form-control form-control-lg" />
 								<span class="input-group-append">
 									<span class="input-group-text">
 										<i class="fas fa-user"></i>
@@ -135,7 +135,7 @@
 								<!-- <a href="pages-recover-password.html" class="float-right">Lost Password?</a> -->
 							</div>
 							<div class="input-group">
-								<input name="passwd" type="password" class="form-control form-control-lg current-password" />
+								<input name="passwd"id="passwd" type="password" class="form-control form-control-lg current-password" />
 								<span class="input-group-append">
 									<span class="input-group-text">
 										<i class="fas fa-lock"></i>
@@ -191,6 +191,25 @@
 
 	<!-- Theme Initialization Files -->
 	<script src="js/theme.init.js"></script>
+	<script>
+		function validate()
+		{
+			var number=$('#phnum').val();
+			var pwd=$('#passwd').val();
+			var ret=true;
+			if(number=="" || number.length != 10)
+			{
+				alert("Enter a Valid Number (10 digit only)!");
+				ret = false;
+			}
+			if(pwd=="")
+			{
+				alert("Enter a Valid Password!");
+				ret = false;
+			}
+			return ret;
+		}
+	</script>
 
 </body>
 

@@ -152,6 +152,9 @@
 									<input type="hidden" value="<?php if (isset($_POST['product_id'])) {
 																	echo $_POST['product_id'];
 																} ?>" id='product_id'>
+																<input type="hidden" value="<?php if (isset($_SESSION['farmer_num'])) {
+																	echo $_SESSION['farmer_num'];
+																} ?>" id='number'>
 									<div class="col-lg-3"></div>
 								</div>
 							</div>
@@ -221,6 +224,7 @@
 			var pro_id = $('#pro_id').val();
 			var pro_quantity = $('#pro_quantity').val();
 			var pro_price = $('#pro_price').val();
+			var number = $('#number').val();
 
 			var ret = true;
 			document.getElementById("name_err").innerHTML = "";
@@ -232,12 +236,12 @@
 				ret = false;
 			}
 
-			if (pro_quantity == "") {
-				document.getElementById("quantity_err").innerHTML = " Quantity Cannot Be Empty";
+			if (isNaN(pro_quantity) || pro_quantity == "") {
+				document.getElementById("quantity_err").innerHTML = "Enter a Valid Quantity!";
 				ret = false;
 			}
-			if (pro_price == "") {
-				document.getElementById("price_err").innerHTML = " Price Cannot Be Empty";
+			if (isNaN(pro_price) || pro_price == "") {
+				document.getElementById("price_err").innerHTML = " Enter a Valid Price";
 				ret = false;
 			}
 
@@ -252,6 +256,7 @@
 					pro_id: pro_id,
 					pro_quantity: pro_quantity,
 					pro_price: pro_price,
+					number:number,
 					product_add: ''
 				},
 				dataType: 'text',
@@ -270,6 +275,7 @@
 			var product_id = $('#product_id').val();
 			var pro_quantity = $('#pro_quantity').val();
 			var pro_price = $('#pro_price').val();
+			var number = $('#number').val();
 
 			var ret = true;
 			document.getElementById("name_err").innerHTML = "";
@@ -296,6 +302,7 @@
 					product_id: product_id,
 					pro_quantity: pro_quantity,
 					pro_price: pro_price,
+					number:number,
 					product_upd: ''
 				},
 				dataType: 'text',
